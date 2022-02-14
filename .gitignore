@@ -127,3 +127,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# DS_Store
+**/.DS_Store
+
+# Exclude model files
+*.h5
+*.hdf5
