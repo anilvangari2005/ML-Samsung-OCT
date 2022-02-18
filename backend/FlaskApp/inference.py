@@ -3,13 +3,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import os
-import keras
-import argparse
 import keras.backend as K
 from keras.models import load_model
 import cv2
 import h5py
+from .vizgradcam.gradcam import create_grad_cam_viz, VizGradCAM, grad_image_preprocessing
 
+def load_opticnet_model():
+    ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+    path_weights = '/home/ubuntu/source/dev-anil/ML-Samsung-OCT/backend/FlaskApp/static/model/Optic_net-4_classes-Kermany2018.hdf5'
+    weights = h5py.File(path_weights, 'r')
+    return load_model(weights)
 
 def get_prediction(preds, classes):
 
@@ -68,10 +72,17 @@ def inference():
 
     processsed_img = image_preprocessing(img)
     K.clear_session()
-    model = load_model(weights)
+    #model = load_model(weights)
     
     preds = model.predict(processsed_img, batch_size = None, steps = 1)  
    
     category = get_prediction(preds, classes)
 
+    input_img, overlay, heatmap = create_grad_cam_viz(model, img)
+
+    cv2.imwrite('/home/ubuntu/source/dev-anil/ML-Samsung-OCT/backend/FlaskApp/static/output/overlay.jpeg', overlay)
+
     return category
+
+
+model = load_opticnet_model()
