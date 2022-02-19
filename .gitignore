@@ -136,3 +136,5 @@ dmypy.json
 *.hdf5
 
 **/output
+
+**/static/temp

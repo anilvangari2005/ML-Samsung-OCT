@@ -10,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DataService } from './services/data.service';
 import { HttpClientModule } from '@angular/common/http';
+import { DemoComponent } from './demo/demo.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
     HomeComponent,
     TopBarComponent,
     IntroComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    DemoComponent
   ],
   imports: [
     BrowserModule,

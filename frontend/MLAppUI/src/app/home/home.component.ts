@@ -7,12 +7,14 @@ import { DataService } from '../services/data.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  images: string[] = [];
+  sampleImages: any;
 
   constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
-    this.images = this.dataService.getImages();
+    this.dataService.getSampleImages().subscribe((data: { images: any; }) => {
+      this.sampleImages = data.images;
+    });
   }
 
 }
