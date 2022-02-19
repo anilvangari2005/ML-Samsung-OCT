@@ -1,0 +1,6 @@
+pycm
+matplotlib
+sklearn
+tensorflow
+Flask
+h5py
