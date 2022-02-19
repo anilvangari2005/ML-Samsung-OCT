@@ -111,14 +111,12 @@ def create_grad_cam_viz(model, img):
     return preprocessed_img, overlay, heatmap
 
 
-def plot_viz(img, overlay, heatmap):
-    fig, axs = plt.subplots(1,3, figsize=(20,10))
+def plot_viz(img, overlay):
+    fig, axs = plt.subplots(1, 2, figsize=(20,10))
     axs[0].imshow(img)
     axs[0].set_title("Input image")
     axs[1].imshow(overlay)
     axs[1].set_title("Heatmap Overlay")
-    axs[2].imshow(heatmap)
-    axs[2].set_title("Grad-CAM Heatmap")
 
 
 def grad_image_preprocessing(img):
