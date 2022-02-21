@@ -17,10 +17,13 @@ export class DemoComponent implements OnInit {
   category: any;
   overlayFileName: any;
   imgFile: string = '';
+  sampleImages: any[] = [];
+  showSamples: boolean = false;
 
   constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
+    this.getSampleFiles();
   }
 
   chooseFile(files: FileList | null) {
@@ -111,6 +114,35 @@ export class DemoComponent implements OnInit {
       u++;
     } while (Math.abs(bytes) >= 1024 && u < units.length - 1);
     return bytes.toFixed(1) + ' ' + units[u];
+  }
+
+  getSampleFiles() {
+
+    let data = {
+      "images": [{
+        "img_name": "CNV-1016042-1.jpeg",
+        "class": "CNV",
+        "img_path": "/assets/test_images/CNV-1016042-1.jpeg",
+        "prediction_img_path": "/assets/test_images/CNV-1016042-1-overlay.jpeg"
+      }, {
+        "img_name": "DME-1081406-1.jpeg",
+        "class": "DME",
+        "img_path": "/assets/test_images/DME-1081406-1.jpeg",
+        "prediction_img_path": "/assets/test_images/DME-1081406-1-overlay.jpeg"
+      }, {
+        "img_name": "DRUSEN-1083159-1.jpeg",
+        "class": "DRUSEN",
+        "img_path": "/assets/test_images/DRUSEN-1083159-1.jpeg",
+        "prediction_img_path": "/assets/test_images/DRUSEN-1083159-1-overlay.jpeg"
+      }, {
+        "img_name": "NORMAL-1017237-1.jpeg",
+        "class": "NORMAL",
+        "img_path": "/assets/test_images/NORMAL-1017237-1.jpeg",
+        "prediction_img_path": "/assets/test_images/NORMAL-1017237-1-overlay.jpeg"
+      }]
+    };
+
+    this.sampleImages = data.images;
   }
 
 

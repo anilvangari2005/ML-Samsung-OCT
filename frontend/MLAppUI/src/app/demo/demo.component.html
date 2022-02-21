@@ -4,6 +4,27 @@
         <div class="col-12">
             <h1 class="text-center m-4">OCT Classification Demo</h1>
         </div>
+        <div class="col-12 text-center">
+            <div class="samples-section row justify-content-center">
+                <div class="col-12 samples-hdr">
+                    <a class="btn btn-link" (click)="showSamples = !showSamples">Download Samples
+                    </a>
+                </div>
+                <div *ngIf="showSamples" class="col-12 samples">
+                    <div class="row ">
+                        <div *ngFor="let img of sampleImages" class="col-12">
+                            <a target="_blank" rel="noopener noreferrer" [href]="img.img_path">{{img.img_name}}</a>
+                        </div>
+                        <div class="col-12">
+                            <a href="https://www.kaggle.com/paultimothymooney/kermany2018" target="_blank"
+                                rel="noopener noreferrer">Kaggle Dataset</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
         <div class="col-3 text-center">
             <label class="btn btn-primary m-3" (click)="fileInput.value">
                 Choose File

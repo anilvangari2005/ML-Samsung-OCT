@@ -5,13 +5,13 @@
   border-radius: 4px;
 }
 
-.predicted-output-panel {  
-    padding: 30px;
-    background-color: #eee;
-    border-radius: 16px;
+.predicted-output-panel {
+  padding: 30px;
+  background-color: #eee;
+  border-radius: 16px;
 
   .category-badge {
-      font-size: 24px;
+    font-size: 24px;
   }
 
   .src-img {
@@ -24,5 +24,21 @@
     //width: 224px;
     height: 224px;
     margin: 20px;
+  }
+}
+
+.samples-section {
+  display: flex;
+  justify-content: center;
+
+  // .samples-hdr {
+  //   width: 400px;
+  // }
+
+  .samples {
+    background-color: rgb(254, 229, 166);
+    border-radius: 5px;
+    padding: 20px;
+    width: 400px;
   }
 }
