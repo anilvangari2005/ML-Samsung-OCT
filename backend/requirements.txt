@@ -2,7 +2,7 @@ pycm
 matplotlib
 sklearn
 tensorflow==2.4.3
-keras==2.4.3
+#keras==2.4.3
 Flask
 h5py
 opencv-python

@@ -3,8 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import os
-import keras.backend as K
-from keras.models import load_model
+import tensorflow.keras.backend as K
+from tensorflow.keras.models import load_model
 import cv2
 import h5py
 from .vizgradcam.gradcam import create_grad_cam_viz, VizGradCAM, grad_image_preprocessing
@@ -20,6 +20,8 @@ def load_opticnet_model():
     weights = h5py.File(path_weights, 'r')
     
     print("load_opticnet_model: End")
+
+    K.clear_session()
     
     return load_model(weights)
 
