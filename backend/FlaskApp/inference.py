@@ -81,6 +81,7 @@ def inference(imgFullPath):
     processsed_img = image_preprocessing(imgFullPath)
     K.clear_session()
     #model = load_model(weights)
+    model = load_opticnet_model()
     
     preds = model.predict(processsed_img, batch_size = None, steps = 1)
    
@@ -93,4 +94,4 @@ def inference(imgFullPath):
     return category, input_img, overlay
 
 
-model = load_opticnet_model()
+#model = load_opticnet_model()
