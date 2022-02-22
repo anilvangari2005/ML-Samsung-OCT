@@ -8,8 +8,9 @@ import cv2
 
 from .inference import inference
 
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLDER = 'static/temp'
-INFERENCE_OUPUT_FOLDER = '/home/ubuntu/source/dev-anil/ML-Samsung-OCT/frontend/MLAppUI/src/assets/test_images'
+INFERENCE_OUTPUT_FOLDER = os.path.join(ROOT_DIR, 'static/output')
 ALLOWED_EXTENSIONS = {'jpg', 'jpeg'}
 
 
@@ -24,10 +25,10 @@ def load_home_page():
 def run_prediction():
 
     # Get category of prediction
-    imgFullPath = '/home/ubuntu/source/dev-anil/ML-Samsung-OCT/backend/FlaskApp/static/test_images/DME-1081406-1.jpeg'
+    imgFullPath = os.path.join(ROOT_DIR, 'static/test_images/DME-1081406-1.jpeg')
     category, input_img, overlay = inference(imgFullPath)
 
-    cv2.imwrite('/home/ubuntu/source/dev-anil/ML-Samsung-OCT/backend/FlaskApp/static/output/overlay.jpeg', overlay)
+    cv2.imwrite(os.path.join(ROOT_DIR, 'static/output/overlay.jpeg'), overlay)
 
     # Render the result template
     return render_template('result.html', category=category)
@@ -98,7 +99,7 @@ def upload_file():
             category, input_img, overlay = inference(tmp_file_path)
 
             overlay_file_name = "overlay_" + filename
-            overlay_full_path = os.path.join(INFERENCE_OUPUT_FOLDER, overlay_file_name)
+            overlay_full_path = os.path.join(INFERENCE_OUTPUT_FOLDER, overlay_file_name)
             cv2.imwrite(overlay_full_path, overlay)
 
             # img = cv2.imread(overlay_full_path)
@@ -113,7 +114,7 @@ def upload_file():
                 "data": {
                     "category": category,
                     "input": "",
-                    "predicted_output": overlay_file_name
+                    "predicted_output": overlay_full_path
                 }
             }), 200)
         

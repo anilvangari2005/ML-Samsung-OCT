@@ -138,3 +138,6 @@ dmypy.json
 **/output
 
 **/static/temp
+
+# Zip folders
+Archive.zip

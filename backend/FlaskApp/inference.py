@@ -10,9 +10,17 @@ import h5py
 from .vizgradcam.gradcam import create_grad_cam_viz, VizGradCAM, grad_image_preprocessing
 
 def load_opticnet_model():
+    print("load_opticnet_model: Begin")
+    
     ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-    path_weights = '/home/ubuntu/source/dev-anil/ML-Samsung-OCT/backend/FlaskApp/static/model/Optic_net-4_classes-Kermany2018.hdf5'
+    # path_weights = '/home/ubuntu/source/dev-anil/ML-Samsung-OCT/backend/FlaskApp/static/model/Optic_net-4_classes-Kermany2018.hdf5'
+    path_weights = os.path.join(ROOT_DIR, "static/model/Optic_net-4_classes-Kermany2018.hdf5")
+    print("Loading model from " + path_weights)
+
     weights = h5py.File(path_weights, 'r')
+    
+    print("load_opticnet_model: End")
+    
     return load_model(weights)
 
 def get_prediction(preds, classes):
