@@ -20,27 +20,40 @@ def load_home_page():
     # Return home page
     return render_template('index.html')
 
+# @app.route('/result', methods=['GET'])
+# def load_result_page():
+
+#     return render_template('result.html')
+
+@app.route('/preview', methods=['GET'])
+def load_preview_page():
+    
+    return render_template('preview.html')
 
 @app.route('/', methods=['POST'])
 def run_prediction():
 
     print(request.files)
-    if 'file' not in request.files:
+    if 'file' not in request.files or request.files['file'].content_length <= 0:
         print('File Not Uploaded')
-        return
+        return render_template('index.html', 
+                    error_msg='File not uploaded')
 
     # Get category of prediction
     file = request.files['file']
-    category, input_img, overlay = inference(file)
+    category, input_img, overlay, input_file_rel_path, overlay_file_rel_path = inference(file)
 
     # # Get category of prediction
     # imgFullPath = os.path.join(ROOT_DIR, 'static/test_images/DME-1081406-1.jpeg')
     # category, input_img, overlay = inference(imgFullPath)
 
-    cv2.imwrite(os.path.join(ROOT_DIR, 'static/output/overlay.jpeg'), overlay)
+    # # cv2.imwrite(os.path.join(ROOT_DIR, 'static/output/overlay.jpeg'), overlay)
 
     # Render the result template
-    return render_template('result.html', category=category)
+    return render_template('result.html', 
+                category = category, 
+                input_file_rel_path = input_file_rel_path, 
+                overlay_file_rel_path = overlay_file_rel_path)
 
 @app.route("/sample/images", methods=["GET"])
 def get_sample_images():

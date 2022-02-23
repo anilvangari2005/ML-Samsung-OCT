@@ -8,6 +8,8 @@ from tensorflow.keras.models import load_model
 import cv2
 import h5py
 from .vizgradcam.gradcam import create_grad_cam_viz, VizGradCAM, grad_image_preprocessing
+import uuid
+import base64
 
 def load_opticnet_model():
     print("load_opticnet_model: Begin")
@@ -98,9 +100,23 @@ def inference(img):
 
     input_img, overlay, heatmap = create_grad_cam_viz(model, imgMat)
 
-    cv2.imwrite('/home/ubuntu/source/dev-anil/ML-Samsung-OCT/backend/FlaskApp/static/output/overlay.jpeg', overlay)
+    ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+    
+    input_file_rel_path = os.path.join('static/output','input_' + str(uuid.uuid4()) + '.jpeg')
+    input_file_path = os.path.join(ROOT_DIR, input_file_rel_path)
+    cv2.imwrite(input_file_path, imgMat)
+    print("Writing image: ", input_file_path)
 
-    return category, input_img, overlay
+    overlay_file_rel_path = os.path.join('static/output','overlay_' + str(uuid.uuid4()) + '.jpeg')
+    overlay_file_path = os.path.join(ROOT_DIR, overlay_file_rel_path)
+    cv2.imwrite(overlay_file_path, overlay)
+    print("Writing image: ", overlay_file_path)
 
+    return category, input_img, overlay, input_file_rel_path, overlay_file_rel_path
+
+# get a UUID - URL safe, Base64
+def get_a_uuid():
+    r_uuid = base64.urlsafe_b64encode(uuid.uuid4().bytes)
+    return r_uuid.replace('=', '')
 
 #model = load_opticnet_model()
