@@ -30,11 +30,11 @@ def load_preview_page():
     
     return render_template('preview.html')
 
-@app.route('/', methods=['POST'])
+@app.route('/imageupload', methods=['POST'])
 def run_prediction():
 
     print(request.files)
-    if 'file' not in request.files or request.files['file'].content_length <= 0:
+    if 'file' not in request.files:
         print('File Not Uploaded')
         return render_template('index.html', 
                     error_msg='File not uploaded')
