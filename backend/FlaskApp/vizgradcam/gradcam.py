@@ -123,7 +123,6 @@ def plot_viz(img, overlay, heatmap):
 
 
 def grad_image_preprocessing(img):
-    img = cv2.imread(img)
     img = cv2.resize(img,(224,224))
     img = np.reshape(img,[224,224,3])
     img = 1.0*img/255

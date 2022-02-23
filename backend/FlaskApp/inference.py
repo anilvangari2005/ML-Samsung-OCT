@@ -52,15 +52,14 @@ def get_prediction(preds, classes):
     
     return top_prediction_class
 
-def image_preprocessing(img):
-    img = cv2.imread(img)
-    img = cv2.resize(img, (224,224))
+def image_preprocessing(img):    
+    img = cv2.resize(img, (224,224))    
     img = np.reshape(img, [1, 224, 224, 3])
     img = 1.0 * img/255
 
     return img
 
-def inference(imgFullPath):
+def inference(img):
 
     # img,weights,dataset
 
@@ -79,8 +78,16 @@ def inference(imgFullPath):
         classes = ['AMD', 'DME', 'NORMAL']
     else:
         classes = ['CNV', 'DME', 'DRUSEN', 'NORMAL']
+    
+    # Convert image from file path or image uploaded into numpy.ndarray
+    if isinstance(img, str):
+        # Image path (str)
+        imgMat = cv2.imread(img)
+    else:
+        # werkzeug.datastructures.FileStorage object
+        imgMat = cv2.imdecode(np.fromstring(img.read(), np.uint8), cv2.IMREAD_COLOR)
 
-    processsed_img = image_preprocessing(imgFullPath)
+    processsed_img = image_preprocessing(imgMat)
     K.clear_session()
     #model = load_model(weights)
     model = load_opticnet_model()
@@ -89,7 +96,7 @@ def inference(imgFullPath):
    
     category = get_prediction(preds, classes)
 
-    input_img, overlay, heatmap = create_grad_cam_viz(model, imgFullPath)
+    input_img, overlay, heatmap = create_grad_cam_viz(model, imgMat)
 
     cv2.imwrite('/home/ubuntu/source/dev-anil/ML-Samsung-OCT/backend/FlaskApp/static/output/overlay.jpeg', overlay)
 

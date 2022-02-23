@@ -24,9 +24,18 @@ def load_home_page():
 @app.route('/', methods=['POST'])
 def run_prediction():
 
+    print(request.files)
+    if 'file' not in request.files:
+        print('File Not Uploaded')
+        return
+
     # Get category of prediction
-    imgFullPath = os.path.join(ROOT_DIR, 'static/test_images/DME-1081406-1.jpeg')
-    category, input_img, overlay = inference(imgFullPath)
+    file = request.files['file']
+    category, input_img, overlay = inference(file)
+
+    # # Get category of prediction
+    # imgFullPath = os.path.join(ROOT_DIR, 'static/test_images/DME-1081406-1.jpeg')
+    # category, input_img, overlay = inference(imgFullPath)
 
     cv2.imwrite(os.path.join(ROOT_DIR, 'static/output/overlay.jpeg'), overlay)
 
