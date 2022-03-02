@@ -1,0 +1,52 @@
+html {
+    /* background-color: aliceblue; */
+}
+
+.page-title {
+    text-align: center;
+    margin: 30px auto;
+}
+
+.prediction-img {
+    height: 224px;
+}
+
+.prediction-content {
+    height: 100vh;
+    margin: auto;
+    width: 70%;
+}
+
+.prediction-result {
+    font-size: 36px;
+    color: darkgoldenrod;
+    text-align: center;
+}
+
+.samples-section {
+    display: flex;
+    justify-content: center;
+}
+  
+.samples {
+    background-color: rgb(254, 229, 166);
+    border-radius: 5px;
+    padding: 20px;
+    width: 400px;
+}
+
+.img-panel {
+
+    background-color: #eee;
+    border-radius: 5px;
+    margin: 15px 5px;
+    padding: 40px;
+}
+
+.img-row {
+    margin-bottom: 20px;
+}
+
+.sample-img {
+    height: 240px;
+}

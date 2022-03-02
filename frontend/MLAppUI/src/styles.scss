@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+
+$primary: purple;
+$secondary: #8f5325;
+$success: #3e8d63;
+$info: #13101c;
+$warning: #945707;
+$danger: #d62518;
+$light: #f8f9fa;
+$dark: #343a40;
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+
+// $theme-colors: (
+//   "primary":    $yellow,
+// //   "secondary":  $secondary,
+// //   "success":    $success,
+// //   "info":       $info,
+// //   "warning":    $warning,
+// //   "danger":     $danger,
+// //   "light":      $light,
+// //   "dark":       $dark
+// );

@@ -1,0 +1,79 @@
+<div>
+
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <h1 class="text-center m-4">OCT Classification Demo</h1>
+        </div>
+        <div class="col-12 text-center">
+            <div class="samples-section row justify-content-center">
+                <div class="col-12 samples-hdr">
+                    <a class="btn btn-link" (click)="showSamples = !showSamples">Download Samples
+                    </a>
+                </div>
+                <div *ngIf="showSamples" class="col-12 samples">
+                    <div class="row ">
+                        <div *ngFor="let img of sampleImages" class="col-12">
+                            <a target="_blank" rel="noopener noreferrer" [href]="img.img_path">{{img.img_name}}</a>
+                        </div>
+                        <div class="col-12">
+                            <a href="https://www.kaggle.com/paultimothymooney/kermany2018" target="_blank"
+                                rel="noopener noreferrer">Kaggle Dataset</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-3 text-center">
+            <label class="btn btn-primary m-3" (click)="fileInput.value">
+                Choose File
+                <input #fileInput type="file" accept=".jpeg,.jpg" style="display: none;"
+                    (change)="chooseFile(fileInput.files)" />
+            </label>
+        </div>
+
+    </div>
+    <div class="row justify-content-center align-items-center mt-4">
+
+        <div class="col-4" *ngIf="selectedFile">
+            <div class="d-flex justify-content-between flex-wrap file-info-bar">
+                <div>{{ selectedFile.name }}</div>
+                <div>{{ humanFileSize(selectedFile.size) }}</div>
+            </div>
+            <div *ngIf="uploading" class="mt-2">
+                <ngb-progressbar type="success" [showValue]="true" [value]="uploadProgress"></ngb-progressbar>
+            </div>
+        </div>
+        <div class="col-auto" *ngIf="selectedFile">
+            <button type="button" class="btn btn-primary" (click)="upload()" [disabled]="uploading">
+                <span *ngIf="!uploading">Upload</span>
+                <span *ngIf="uploading">Processing ...</span>
+            </button>
+        </div>
+
+        <div class="col text-center predicted-output-panel" *ngIf="category || overlayFileName">
+            <div class="d-block mb-3">
+                <div class="d-block mb-2">Prediction</div>
+                <div class="badge bg-primary category-badge">{{category}}</div>
+            </div>
+
+            <img *ngIf="imgFile" [src]="imgFile" class="src-img">
+
+            <img *ngIf="overlayFileName" [src]="'/assets/test_images/' + overlayFileName" class="predicted-output-img">
+        </div>
+
+    </div>
+
+    <div class="row justify-content-center align-items-center mt-4">
+        <div class="col text-danger" *ngIf="errorMsg">
+            {{ errorMsg }}
+        </div>
+
+        <div class="col text-success" *ngIf="submissionResult">
+            <p class="font-weight-bold mb-0">File uploaded</p>
+            <pre>{{ submissionResult | json }}</pre>
+        </div>
+
+    </div>
+</div>
